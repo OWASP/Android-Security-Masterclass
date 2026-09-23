@@ -1,0 +1,84 @@
+/* =========================================================================
+   Android Security Masterclass - Premium Cyber Theme
+   ========================================================================= */
+
+/* --- Glassmorphism & Depth --- */
+.md-typeset table:not([class]) {
+  background: var(--md-default-bg-color);
+  border-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  border: 1px solid var(--md-default-fg-color--lightest);
+}
+
+.md-typeset table:not([class]) th {
+  background-color: var(--md-default-fg-color--lightest);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.85em;
+  letter-spacing: 0.05em;
+}
+
+/* --- Micro-Animations --- */
+.md-nav__link {
+  transition: all 0.2s ease-in-out;
+}
+
+.md-nav__link:hover {
+  transform: translateX(4px);
+  color: var(--md-primary-fg-color);
+}
+
+.md-typeset a {
+  transition: all 0.2s ease;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+
+.md-typeset a:hover {
+  border-bottom-color: var(--md-accent-fg-color);
+  color: var(--md-accent-fg-color);
+}
+
+/* --- Code Block Polish --- */
+.md-typeset pre > code {
+  border-radius: 8px;
+  box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+}
+
+/* --- Admonition (Alert) Enhancements --- */
+.md-typeset .admonition {
+  border-radius: 6px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  border-width: 0;
+  border-left-width: 4px;
+}
+
+.md-typeset .admonition.warning {
+  border-left-color: #ff9800;
+  background-color: rgba(255, 152, 0, 0.05);
+}
+
+.md-typeset .admonition.danger {
+  border-left-color: #f44336;
+  background-color: rgba(244, 67, 54, 0.05);
+}
+
+/* --- Custom Scrollbar for a sleek feel --- */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--md-default-bg-color); 
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--md-default-fg-color--lighter); 
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--md-primary-fg-color); 
+}

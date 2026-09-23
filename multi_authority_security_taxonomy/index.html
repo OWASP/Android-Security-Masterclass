@@ -1,0 +1,1641 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A Hands-on OWASP MASVS/MASTG Security Training Lab for Android Developers & Pentesters">
+      
+      
+      
+        <link rel="canonical" href="https://owasp.github.io/Android-Security-Masterclass/multi_authority_security_taxonomy/">
+      
+      
+        <link rel="prev" href="../mapping_matrix/">
+      
+      
+        <link rel="next" href="../about/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>📊 Security Taxonomy - Android Security Masterclass</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="teal">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#multi-authority-mobile-security-taxonomy-architecture-specification" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Android Security Masterclass" class="md-header__button md-logo" aria-label="Android Security Masterclass" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 11c0 5.55-3.84 10.74-9 12-5.16-1.26-9-6.45-9-12V5l9-4 9 4zm-9 10c3.75-1 7-5.46 7-9.78V6.3l-7-3.12L5 6.3v4.92C5 15.54 8.25 20 12 21m2.8-10V9.5C14.8 8.1 13.4 7 12 7S9.2 8.1 9.2 9.5V11c-.6 0-1.2.6-1.2 1.2v3.5c0 .7.6 1.3 1.2 1.3h5.5c.7 0 1.3-.6 1.3-1.2v-3.5c0-.7-.6-1.3-1.2-1.3m-1.3 0h-3V9.5c0-.8.7-1.3 1.5-1.3s1.5.5 1.5 1.3z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Android Security Masterclass
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              📊 Security Taxonomy
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="teal"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent="teal"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/OWASP/Android-Security-Masterclass" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    OWASP/Android-Security-Masterclass
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  🏠 Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../whitepaper/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  📜 Whitepaper
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../mapping_matrix/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  🗺️ Mapping Matrix
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  📊 Security Taxonomy
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../about/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  🛡️ About & Roadmap
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../sast_pipeline/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  🔍 SAST Pipeline
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../mastg-best/MASTG-BEST-0002-ProGuard/" class="md-tabs__link">
+          
+  
+  
+  🏆 MASTG Best Practices
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../maswe/MASVS-STORAGE/maswe_001/MASWE-0001-Insecure-Private-Storage/" class="md-tabs__link">
+          
+  
+  
+  🗄️ MASVS-STORAGE
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../maswe/MASVS-CRYPTO/maswe_007/MASWE-0007-Improper-Encryption/" class="md-tabs__link">
+          
+  
+  
+  🔐 MASVS-CRYPTO
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Android Security Masterclass" class="md-nav__button md-logo" aria-label="Android Security Masterclass" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 11c0 5.55-3.84 10.74-9 12-5.16-1.26-9-6.45-9-12V5l9-4 9 4zm-9 10c3.75-1 7-5.46 7-9.78V6.3l-7-3.12L5 6.3v4.92C5 15.54 8.25 20 12 21m2.8-10V9.5C14.8 8.1 13.4 7 12 7S9.2 8.1 9.2 9.5V11c-.6 0-1.2.6-1.2 1.2v3.5c0 .7.6 1.3 1.2 1.3h5.5c.7 0 1.3-.6 1.3-1.2v-3.5c0-.7-.6-1.3-1.2-1.3m-1.3 0h-3V9.5c0-.8.7-1.3 1.5-1.3s1.5.5 1.5 1.3z"/></svg>
+
+    </a>
+    Android Security Masterclass
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/OWASP/Android-Security-Masterclass" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    OWASP/Android-Security-Masterclass
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🏠 Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../whitepaper/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📜 Whitepaper
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mapping_matrix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🗺️ Mapping Matrix
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📊 Security Taxonomy
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📊 Security Taxonomy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-multi-authority-standards-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Multi-Authority Standards Matrix
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-cross-authority-mapping-for-reference-categories" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Cross-Authority Mapping for Reference Categories
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Cross-Authority Mapping for Reference Categories">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#domain-1-data-storage-privacy-masvs-storage-masvs-privacy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Domain 1: Data Storage &amp; Privacy (MASVS-STORAGE &amp; MASVS-PRIVACY)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#domain-2-cryptographic-architecture-masvs-crypto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Domain 2: Cryptographic Architecture (MASVS-CRYPTO)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#domain-3-platform-interaction-ipc-masvs-platform" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Domain 3: Platform Interaction &amp; IPC (MASVS-PLATFORM)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#domain-4-network-communication-masvs-network" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Domain 4: Network Communication (MASVS-NETWORK)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-reference-implementation-architecture-the-triad-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Reference Implementation Architecture: The Triad Pattern
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Reference Implementation Architecture: The Triad Pattern">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#module-blueprint-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Module Blueprint Checklist
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🛡️ About & Roadmap
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sast_pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🔍 SAST Pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🏆 MASTG Best Practices
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🏆 MASTG Best Practices
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mastg-best/MASTG-BEST-0002-ProGuard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MASTG-BEST-0002 ProGuard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🗄️ MASVS-STORAGE
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🗄️ MASVS-STORAGE
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../maswe/MASVS-STORAGE/maswe_001/MASWE-0001-Insecure-Private-Storage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MASWE-0001 Insecure Private Storage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../maswe/MASVS-STORAGE/maswe_002/MASWE-0002-Insecure-Storage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MASWE-0002 Insecure Storage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../maswe/MASVS-STORAGE/maswe_003/MASWE-0003-Insecure-Key-Storage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MASWE-0003 Insecure Key Storage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../maswe/MASVS-STORAGE/maswe_004/MASWE-0004-Hardcoded-Secrets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MASWE-0004 Hardcoded Secrets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../maswe/MASVS-STORAGE/maswe_005/MASWE-0005-Logging-Leaks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MASWE-0005 Logging Leaks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../maswe/MASVS-STORAGE/maswe_006/MASWE-0006-Sensitive-Data-Backup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MASWE-0006 Sensitive Data in Backup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🔐 MASVS-CRYPTO
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🔐 MASVS-CRYPTO
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../maswe/MASVS-CRYPTO/maswe_007/MASWE-0007-Improper-Encryption/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MASWE-0007 Improper Encryption
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-multi-authority-standards-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Multi-Authority Standards Matrix
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-cross-authority-mapping-for-reference-categories" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Cross-Authority Mapping for Reference Categories
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Cross-Authority Mapping for Reference Categories">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#domain-1-data-storage-privacy-masvs-storage-masvs-privacy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Domain 1: Data Storage &amp; Privacy (MASVS-STORAGE &amp; MASVS-PRIVACY)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#domain-2-cryptographic-architecture-masvs-crypto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Domain 2: Cryptographic Architecture (MASVS-CRYPTO)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#domain-3-platform-interaction-ipc-masvs-platform" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Domain 3: Platform Interaction &amp; IPC (MASVS-PLATFORM)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#domain-4-network-communication-masvs-network" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Domain 4: Network Communication (MASVS-NETWORK)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-reference-implementation-architecture-the-triad-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Reference Implementation Architecture: The Triad Pattern
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Reference Implementation Architecture: The Triad Pattern">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#module-blueprint-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Module Blueprint Checklist
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="multi-authority-mobile-security-taxonomy-architecture-specification">Multi-Authority Mobile Security Taxonomy &amp; Architecture Specification</h1>
+<p>This specification establishes the cross-standard architectural threat modeling, verification taxonomy, and defensive engineering blueprint for the <code>Android Security Masterclass</code>.</p>
+<p>It harmonizes requirements across <strong>OWASP MASVS v2.0</strong>, <strong>MITRE ATT&amp;CK Mobile</strong>, <strong>NIST SP 800-163 Rev. 1</strong>, <strong>NIST SP 800-218 (SSDF)</strong>, <strong>Google Android Security Guidelines</strong>, and <strong>CISA Mobile Zero Trust</strong>.</p>
+<hr />
+<h2 id="1-multi-authority-standards-matrix">1. Multi-Authority Standards Matrix</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Standard / Authority</th>
+<th style="text-align: left;">Focus Area</th>
+<th style="text-align: left;">Application to Android Security Masterclass</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>OWASP MASVS v2.0</strong></td>
+<td style="text-align: left;">Mobile Application Security Verification</td>
+<td style="text-align: left;">Defines L1 (Standard), L2 (Defense-in-Depth), and MASVS-R (Resilience) profiles across 8 domains: Storage, Crypto, Auth, Network, Platform, Code, Resilience, Privacy.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>MITRE ATT&amp;CK for Mobile</strong></td>
+<td style="text-align: left;">Real-world Adversary Tactics &amp; Techniques</td>
+<td style="text-align: left;">Threat model mapping for active adversarial behaviors: Exfiltration, Credential Access, Defense Evasion, Collection, and Impact.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>NIST SP 800-163 Rev. 1</strong></td>
+<td style="text-align: left;">Vetting the Security of Mobile Applications</td>
+<td style="text-align: left;">Formal software assurance framework evaluating security vulnerabilities, supply chain threats, and sensitive data leakage before deployment.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>NIST SP 800-218 (SSDF)</strong></td>
+<td style="text-align: left;">Secure Software Development Framework</td>
+<td style="text-align: left;">Secure by design principles: automated SAST/DAST verification, cryptographic key hygiene, dependency governance.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Google Android Security</strong></td>
+<td style="text-align: left;">Platform &amp; Hardware Architecture</td>
+<td style="text-align: left;">Hardware-backed keystore (StrongBox / KeyMint), Scoped Storage (MediaStore &amp; SAF), Cleartext Traffic prohibitions, Jetpack Security &amp; Tink AEAD.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>CISA / NSA Mobile Zero Trust</strong></td>
+<td style="text-align: left;">Zero Trust Architecture for Mobility</td>
+<td style="text-align: left;">Assumes host and network compromise. Requires hardware-rooted trust, authenticated encryption at rest and in transit, and continuous validation.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="2-cross-authority-mapping-for-reference-categories">2. Cross-Authority Mapping for Reference Categories</h2>
+<h3 id="domain-1-data-storage-privacy-masvs-storage-masvs-privacy">Domain 1: Data Storage &amp; Privacy (<code>MASVS-STORAGE</code> &amp; <code>MASVS-PRIVACY</code>)</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Threat Scenario</th>
+<th style="text-align: left;">OWASP MASVS v2.0</th>
+<th style="text-align: left;">MITRE ATT&amp;CK Mobile</th>
+<th style="text-align: left;">NIST SP 800-163</th>
+<th style="text-align: left;">Google Android Guideline</th>
+<th style="text-align: left;">CISA Zero Trust Guidance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Unencrypted Private DataStore / SharedPrefs</strong></td>
+<td style="text-align: left;">MASVS-STORAGE-1<br>MASTG-TEST-0001</td>
+<td style="text-align: left;"><strong>T1409</strong> (Access Stored App Data)<br><strong>T1516</strong> (Insecure File Permissions)</td>
+<td style="text-align: left;">Section 4.1: Data in Rest Exposure</td>
+<td style="text-align: left;">Use <code>EncryptedDataStore</code> or Tink AEAD. Do not rely on SQLite or binary serialization.</td>
+<td style="text-align: left;">Data at rest must be cryptographically protected under hardware-derived keys.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>World-Readable External Storage Exposure</strong></td>
+<td style="text-align: left;">MASVS-STORAGE-2<br>MASTG-TEST-0006</td>
+<td style="text-align: left;"><strong>T1409.001</strong> (External Storage)<br><strong>T1575</strong> (Shared Resource Tampering)</td>
+<td style="text-align: left;">Section 4.2: Shared Memory Vulnerability</td>
+<td style="text-align: left;">Enforce Scoped Storage (<code>minSdk &gt;= 26</code>, <code>compileSdk = 37</code>). Never store PII in <code>getExternalFilesDir()</code>.</td>
+<td style="text-align: left;">Strict sandbox boundary. No persistent external artifacts without access tokens.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>System Console &amp; Telemetry Leak</strong></td>
+<td style="text-align: left;">MASVS-STORAGE-1<br>MASTG-TEST-0002</td>
+<td style="text-align: left;"><strong>T1417</strong> (Input Capture)<br><strong>T1426</strong> (System Information Discovery)</td>
+<td style="text-align: left;">Section 4.5: Information Disclosure in Logs</td>
+<td style="text-align: left;">Use R8 <code>-assumenosideeffects</code> stripping and <code>@CompileTimeConstant</code> safe loggers (<code>SecureLog</code>).</td>
+<td style="text-align: left;">Zero PII / credential emission to platform logging subsystems.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Path Traversal via FileProvider</strong></td>
+<td style="text-align: left;">MASVS-PLATFORM-2<br>MASTG-TEST-0027</td>
+<td style="text-align: left;"><strong>T1470</strong> (Exploit IPC / Providers)</td>
+<td style="text-align: left;">Section 4.4: Insecure IPC</td>
+<td style="text-align: left;">Prohibit <code>&lt;root-path path="/" /&gt;</code>. Restrict paths to canonical subdirectory bounds.</td>
+<td style="text-align: left;">Principle of Least Privilege: scoped ContentProvider permissions only.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Indefinite Cache &amp; Scratch Persistence</strong></td>
+<td style="text-align: left;">MASVS-STORAGE-1<br>MASTG-TEST-0001</td>
+<td style="text-align: left;"><strong>T1409</strong> (Access Stored App Data)</td>
+<td style="text-align: left;">Section 4.1: Ephemeral Data Leakage</td>
+<td style="text-align: left;">Immediate explicit removal (<code>file.delete()</code>, <code>deleteOnExit()</code>). Avoid on-disk scratch if in-memory streaming is possible.</td>
+<td style="text-align: left;">Ephemeral tokens must be erased from volatile and non-volatile memory immediately after processing.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="domain-2-cryptographic-architecture-masvs-crypto">Domain 2: Cryptographic Architecture (<code>MASVS-CRYPTO</code>)</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Threat Scenario</th>
+<th style="text-align: left;">OWASP MASVS v2.0</th>
+<th style="text-align: left;">MITRE ATT&amp;CK Mobile</th>
+<th style="text-align: left;">NIST SP 800-163</th>
+<th style="text-align: left;">Google Android Guideline</th>
+<th style="text-align: left;">CISA Zero Trust Guidance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Hardcoded Symmetric Keys</strong></td>
+<td style="text-align: left;">MASVS-CRYPTO-1<br>MASTG-TEST-0012</td>
+<td style="text-align: left;"><strong>T1412</strong> (Capture SMS / Credentials)<br><strong>T1414</strong> (Reverse Engineering)</td>
+<td style="text-align: left;">Section 4.3: Hardcoded Secrets</td>
+<td style="text-align: left;">Generate keys inside <code>AndroidKeyStore</code>. Never place byte arrays or strings in source code.</td>
+<td style="text-align: left;">Hardware-rooted secret generation; keys never leave hardware boundary unencrypted.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Filesystem Plaintext Key Storage</strong></td>
+<td style="text-align: left;">MASVS-CRYPTO-2<br>MASTG-TEST-0013</td>
+<td style="text-align: left;"><strong>T1409</strong> (Access Stored App Data)</td>
+<td style="text-align: left;">Section 4.3: Cryptographic Key Exposure</td>
+<td style="text-align: left;">Utilize Envelope Encryption: Data Encryption Key (DEK) encrypted by Key Encryption Key (KEK).</td>
+<td style="text-align: left;">Keys at rest must be protected by asymmetric or hardware-backed master key.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Weak / Insecure Cipher Modes (ECB)</strong></td>
+<td style="text-align: left;">MASVS-CRYPTO-3<br>MASTG-TEST-0014</td>
+<td style="text-align: left;"><strong>T1409</strong> (Cryptanalysis / Data Recovery)</td>
+<td style="text-align: left;">Section 4.3: Cryptographic Algorithm Flaws</td>
+<td style="text-align: left;">Enforce Authenticated Encryption with Associated Data (AEAD: AES-256-GCM, ChaCha20-Poly1305).</td>
+<td style="text-align: left;">NIST SP 800-38D compliance; zero electronic codebook (ECB) mode usage.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Post-Quantum Cryptographic Readiness</strong></td>
+<td style="text-align: left;">MASVS-CRYPTO-1<br>(Advanced)</td>
+<td style="text-align: left;"><strong>T1539</strong> (Steal Web Session / Key Material)</td>
+<td style="text-align: left;">NIST FIPS 203 / FIPS 204 (PQC Standards)</td>
+<td style="text-align: left;">Introduce ML-KEM (Kyber) and ML-DSA (Dilithium) key encapsulation via BouncyCastle.</td>
+<td style="text-align: left;">Prepare cryptographic agility for Quantum Decryption Attacks (Harvest Now, Decrypt Later).</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="domain-3-platform-interaction-ipc-masvs-platform">Domain 3: Platform Interaction &amp; IPC (<code>MASVS-PLATFORM</code>)</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Threat Scenario</th>
+<th style="text-align: left;">OWASP MASVS v2.0</th>
+<th style="text-align: left;">MITRE ATT&amp;CK Mobile</th>
+<th style="text-align: left;">NIST SP 800-163</th>
+<th style="text-align: left;">Google Android Guideline</th>
+<th style="text-align: left;">CISA Zero Trust Guidance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Implicit Intent Hijacking</strong></td>
+<td style="text-align: left;">MASVS-PLATFORM-1<br>MASTG-TEST-0026</td>
+<td style="text-align: left;"><strong>T1400</strong> (Broadcast / Intent Interception)</td>
+<td style="text-align: left;">Section 4.4: Insecure IPC</td>
+<td style="text-align: left;">Explicit Component Name setting (<code>setClassName</code> / <code>setPackage</code>) for all internal IPC.</td>
+<td style="text-align: left;">IPC must include identity authentication and verifiable signature checks.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Warm-Start Intent Dropping</strong></td>
+<td style="text-align: left;">MASVS-PLATFORM-1</td>
+<td style="text-align: left;"><strong>T1400</strong> (Adversary Intent Suppression)</td>
+<td style="text-align: left;">Section 4.4: Lifecycle State Handling</td>
+<td style="text-align: left;">Override <code>onNewIntent(intent)</code> in singleTask / top activities to process subsequent payloads.</td>
+<td style="text-align: left;">Resilient event ingestion; zero lifecycle state desynchronization.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>FileProvider Excessive Granting</strong></td>
+<td style="text-align: left;">MASVS-PLATFORM-2<br>MASTG-TEST-0027</td>
+<td style="text-align: left;"><strong>T1470</strong> (Exploitation of Provider)</td>
+<td style="text-align: left;">Section 4.4: Insecure Content Providers</td>
+<td style="text-align: left;">Set <code>android:exported="false"</code>, grant temporary read-only URI permissions per transaction.</td>
+<td style="text-align: left;">Fine-grained, least-privilege capability tokens.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="domain-4-network-communication-masvs-network">Domain 4: Network Communication (<code>MASVS-NETWORK</code>)</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Threat Scenario</th>
+<th style="text-align: left;">OWASP MASVS v2.0</th>
+<th style="text-align: left;">MITRE ATT&amp;CK Mobile</th>
+<th style="text-align: left;">NIST SP 800-163</th>
+<th style="text-align: left;">Google Android Guideline</th>
+<th style="text-align: left;">CISA Zero Trust Guidance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Cleartext HTTP Transmission</strong></td>
+<td style="text-align: left;">MASVS-NETWORK-1<br>MASTG-TEST-0018</td>
+<td style="text-align: left;"><strong>T1437</strong> (Application Protocol)<br><strong>T1439</strong> (Adversary-in-the-Middle)</td>
+<td style="text-align: left;">Section 4.6: Insecure Communication</td>
+<td style="text-align: left;">Enforce <code>network_security_config.xml</code> with <code>cleartextTrafficPermitted="false"</code>.</td>
+<td style="text-align: left;">Mutual TLS (mTLS) or TLS 1.3 only; zero unencrypted data in transit.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Certificate / Trust Manager Bypass</strong></td>
+<td style="text-align: left;">MASVS-NETWORK-2<br>MASTG-TEST-0019</td>
+<td style="text-align: left;"><strong>T1439</strong> (Adversary-in-the-Middle)</td>
+<td style="text-align: left;">Section 4.6: Trust Evaluation</td>
+<td style="text-align: left;">Restrict trust anchors to <code>system</code> certificates; prevent user-installed CA interception.</td>
+<td style="text-align: left;">Strict pin-validation and continuous certificate attestation.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="3-reference-implementation-architecture-the-triad-pattern">3. Reference Implementation Architecture: The Triad Pattern</h2>
+<p>Each MASWE feature module implements the standard 3-tiered demonstration:</p>
+<pre class="mermaid"><code>graph TD
+    subgraph App Attacker [":app-attacker (Adversary Persona)"]
+        AttackerExploit["Exploit Intent / Content Resolver"]
+        AttackerLogger["Logcat Monitor / Storage Crawler"]
+    end
+
+    subgraph App Vulnerable [":app-vulnerable (Flawed Architecture)"]
+        VulnScreen["MasweXXXXVulnerableScreen"]
+        VulnVM["MasweXXXXVulnerableViewModel"]
+        VulnRepo["MasweXXXXVulnerableRepository (Flawed Code)"]
+        VulnDisk["Unprotected Disk / Logcat / Intent Leak"]
+    end
+
+    subgraph App Secure [":app-secure (Hardened Architecture)"]
+        SecureScreen["MasweXXXXSecureScreen"]
+        SecureVM["MasweXXXXSecureViewModel (MVI UDF)"]
+        SecureRepo["MasweXXXXSecureRepository (Tink / Keystore)"]
+        SecureVault["Encrypted Storage / Scoped Files / Zero Leak"]
+    end
+
+    AttackerExploit -.-&gt;|"Exploits Unprotected URI"| VulnDisk
+    AttackerLogger -.-&gt;|"Harvests Plaintext Data"| VulnDisk
+    AttackerExploit --x|"Blocked by Permission Denial"| SecureVault
+    AttackerLogger --x|"Blocked by R8 Stripping &amp; Keystore"| SecureVault</code></pre>
+<h3 id="module-blueprint-checklist">Module Blueprint Checklist</h3>
+<ol>
+<li><strong>Repository Layer</strong>:</li>
+<li>Vulnerable repository illustrates the exact flaw (e.g. ECB mode, root-path FileProvider).</li>
+<li>Secure repository provides defense-in-depth mitigation (Tink, Keystore, Scoped paths, explicit deletion).</li>
+<li>Coroutine cancellation safety: must never swallow <code>CancellationException</code>.</li>
+<li><strong>Presentation Layer (MVI)</strong>:</li>
+<li>ViewModel extends <code>MviViewModel&lt;State, Intent, Effect&gt;</code>.</li>
+<li>State mutability uses atomic CAS: <code>updateState { it.copy(...) }</code>.</li>
+<li>One-off events flow through <code>Channel&lt;Effect&gt;(Channel.BUFFERED)</code>.</li>
+<li>Screens enforce 52dp touch targets (<code>heightIn(min = 52.dp)</code>).</li>
+<li>Zero hardcoded strings: all UI labels, formatting, and errors reside in <code>strings.xml</code>.</li>
+<li><strong>Build &amp; ProGuard Configuration</strong>:</li>
+<li>Features apply <code>mobsec.android.feature</code>.</li>
+<li>Release builds strip logs via R8 <code>-assumenosideeffects</code>.</li>
+<li>AndroidManifest specifies <code>android:allowBackup="false"</code> and <code>android:networkSecurityConfig</code>.</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "navigation.instant", "navigation.tracking", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.annotate"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
